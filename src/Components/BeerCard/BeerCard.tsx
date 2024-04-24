@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import { Beer } from '../../assets/Data/types';
 
-interface BeerCardProps {
+export interface BeerCardProps {
     beer: Beer;
   }
 
