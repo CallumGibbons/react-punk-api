@@ -1,26 +1,17 @@
-import { useState } from 'react'
-import {Routes, Route, Link} from "react-router-dom"
-import { Beer } from './assets/Data/types'
-import beers from './assets/Data/beers'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import beerProfile from "./Components/BeerProfile/BeerProfile";
+import Home from "./Components/Home/Home";
+import "./App.css";
 
 function App() {
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [filters, setFilters] = useState<string[]>([]);
-  
-  
-  
-  
-  
-  
-  
   return (
-    <div>
-    <Nav/>
-    <beerCardContainer/>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/Home" Component={Home} />
+        <Route path="/beer/:id" Component={beerProfile} />
+      </Routes>
+    </Router>
+  );
 }
 
-
-export default App
+export default App;
