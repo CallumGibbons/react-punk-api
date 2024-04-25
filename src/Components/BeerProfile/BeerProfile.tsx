@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import beers from "../../assets/Data/beers";
-import "./BeerProfile.css"
+import { Beer } from "../../assets/Data/types";
 
 interface BeerProfileProps {
   handleDisplay: (display: boolean) => void;
@@ -10,8 +9,30 @@ interface BeerProfileProps {
 
 const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
   const { id } = useParams();
-  const beerId = parseFloat(id || "0");
-  const beer = beers.find((beer) => beer.id === beerId);
+  const [beer, setBeer] = useState<Beer | null>(null);
+
+  useEffect(() => {
+    handleDisplay(false)
+    const fetchBeer = async () => {
+      try {
+        const response = await fetch(`http://localhost:3333/v2/beers/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch beer details");
+        }
+        const data = await response.json();
+        setBeer(data[0]);
+      } catch (error) {
+        console.error("Error fetching beer details:", error);
+      }
+    };
+
+    fetchBeer();
+
+    return () => {
+      handleDisplay(true);
+    };
+  }, [id, handleDisplay]);
+
   const shortenedDescription = (desc: string) => {
     if (desc.length <= 400) {
       return desc;
@@ -19,14 +40,6 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
       return desc.substring(0, desc.lastIndexOf(".", 401)) + "...";
     }
   };
-
-  useEffect(() => {
-     handleDisplay(false);
-    
-     return () => {
-      handleDisplay(true);
-    };
-  }, [handleDisplay]);
 
   if (!beer) {
     return <div>Beer not found</div>;
@@ -36,20 +49,19 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
     <div>
       <div className="backButton">
         <button>
-          <Link to="/Home">Home</Link>
+          <Link to="/">Home</Link>
         </button>
       </div>
       <div className="beerCard-container">
         <img src={beer.image_url} alt={beer.name} />
-        <div className="beer-info">
-          <p className="name">{beer.name}</p>
-          <p className="tagline">{beer.tagline}</p>
-          <p className="description">{shortenedDescription(beer.description)}</p>
-          <p>{beer.food_pairing.join(", ")}</p>
-          <p className="abv">
-            {beer.abv}%
+        <div>
+          <p>{beer.name}</p>
+          <p>{beer.tagline}</p>
+          <p>{shortenedDescription(beer.description)}</p>
+          <p>
+            {beer.abv}% {beer.food_pairing.join(", ")}
           </p>
-          <p className="ph">{beer.ph}</p>
+          <p>{beer.ph}</p>
         </div>
       </div>
     </div>

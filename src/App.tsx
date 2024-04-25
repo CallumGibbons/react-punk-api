@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import BeerProfile from "./Components/BeerProfile/BeerProfile";
 import Home from "./Components/Home/Home";
@@ -6,7 +6,6 @@ import { Beer } from "./assets/Data/types";
 import "./App.css";
 import BeerList from "./Components/BeerList/BeerList";
 import Nav from "./Components/Nav/Nav";
-import beers from "./assets/Data/beers";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -14,10 +13,28 @@ function App() {
   const [highABVFilter, setHighABVFilter] = useState<boolean>(false);
   const [classicFilter, setClassicFilter] = useState<boolean>(false);
   const [acidicFilter, setAcidicFilter] = useState<boolean>(false);
+  const [beers, setBeers] = useState<Beer[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
+  useEffect(() => {
+    fetchBeers();
+  }, [currentPage]);
 
-  console.log(acidicFilter);
-  
+  const fetchBeers = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3333/v2/beers/?page=${currentPage}&per_page=20`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch beers");
+      }
+      const data = await response.json();
+      setBeers(data);
+    } catch (error) {
+      console.error("Error fetching beers:", error);
+    }
+  };
+
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
   };
@@ -28,10 +45,7 @@ function App() {
     highABV: boolean,
     acidic: boolean,
     classic: boolean
- 
   ): Beer[] => {
-    console.log(acidic);
-    
     let filtered = beers.filter((beer) =>
       beer.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -40,12 +54,13 @@ function App() {
       filtered = filtered.filter((beer) => beer.abv > 6);
     }
     if (classic) {
-      filtered = filtered.filter((beer) => beer.first_brewed);
+      filtered = filtered.filter((beer) => {
+        const firstBrewedYear = parseInt(beer.first_brewed.split("/")[1]);
+        return firstBrewedYear < 2010;
+      });
     }
     if (acidic) {
-      console.log("getting here")
       filtered = filtered.filter((beer) => beer.ph < 4);
-      console.log(filtered)
     }
 
     return filtered;
@@ -67,10 +82,14 @@ function App() {
     setClassicFilter(isChecked);
   };
 
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <Router>
       <div className="App">
-        {showBeerList && ( 
+        {showBeerList && (
           <Nav
             searchTerm={searchTerm}
             onSearchChange={handleSearchChange}
@@ -83,7 +102,7 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/Home" element={<Home/>} />
+          <Route path="/" element={<Home />} />
           <Route
             path="/beer/:id"
             element={<BeerProfile handleDisplay={handleBeerProfileDisplay} />}
@@ -100,6 +119,10 @@ function App() {
                 classicFilter
               )}
             />
+                      <div className="pagination">
+                      <button  className="Back-Button"onClick={() => handlePageChange(currentPage - 1)}/>
+                      <button className="Forward-Button"onClick={() => handlePageChange(currentPage + 1)}/>
+          </div>
           </div>
         )}
       </div>
