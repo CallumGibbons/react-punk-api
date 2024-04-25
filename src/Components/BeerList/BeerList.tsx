@@ -1,5 +1,6 @@
 import { Beer } from "../../assets/Data/types";
 import BeerCard from "../BeerCard/BeerCard";
+import "./BeerList.css"
 
 interface BeerListProps {
   beers: Beer[];

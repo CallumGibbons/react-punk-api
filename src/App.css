@@ -1,0 +1,22 @@
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.Nav {
+  width: 20%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+}
+
+.beers {
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
