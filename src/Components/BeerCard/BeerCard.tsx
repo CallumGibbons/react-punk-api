@@ -1,14 +1,15 @@
-import { Beer } from '../../assets/Data/types';
+import { Beer } from "../../assets/Data/types";
+import { Link } from "react-router-dom";
 
 export interface BeerCardProps {
-    beer: Beer;
-  }
+  beer: Beer;
+}
 
-function BeerCard({beer}: BeerCardProps) {
+function BeerCard({ beer }: BeerCardProps) {
   return (
     <div className="beer-card">
       <img src={beer.image_url} alt={beer.name} />
-      <h2>{beer.name}</h2>
+      <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
       <p>{beer.tagline}</p>
       <p>{beer.description}</p>
       <p>ABV: {beer.abv}%</p>
@@ -16,4 +17,4 @@ function BeerCard({beer}: BeerCardProps) {
   );
 }
 
-export default BeerCard
+export default BeerCard;

@@ -1,7 +1,5 @@
-import { Beer } from '../../assets/Data/types';
-import BeerCard from '../BeerCard/BeerCard';
-
-
+import { Beer } from "../../assets/Data/types";
+import BeerCard from "../BeerCard/BeerCard";
 
 interface BeerListProps {
   beers: Beer[];
