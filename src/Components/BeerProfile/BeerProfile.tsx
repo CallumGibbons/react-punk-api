@@ -48,14 +48,15 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
       </div>
       <div className="beerCard-container">
         <img src={beer.image_url} alt={beer.name} />
-        <div>
-          <p>{beer.name}</p>
-          <p>{beer.tagline}</p>
-          <p>{beer.description}</p>
-          <p>
-            {beer.abv}% {beer.food_pairing.join(", ")}
+        <div className="beer-info">
+          <p className="name">{beer.name}</p>
+          <p className="tagline">{beer.tagline}</p>
+          <p className="description">{beer.description}</p>
+          <p className="description">{beer.brewers_tips}</p>
+          <p className="abv">
+            {beer.abv}%      {beer.food_pairing.join(", ")}
           </p>
-          <p>{beer.ph}</p>
+          <p className="ph">{beer.ph} ph</p>
         </div>
       </div>
     </div>
