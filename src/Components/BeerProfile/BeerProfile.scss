@@ -1,0 +1,74 @@
+.beer-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .backButton {
+    margin-bottom: 20px;
+  }
+  
+  .backButton button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  .beerCard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .beerCard-container img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  .beer-info {
+    flex: 1;
+  }
+  
+  .beer-info p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #333;
+  }
+  .beer-info p.name {
+    font-size: 30px;
+    font-style: italic;
+  }
+  .beer-info p.tagline {
+    font-style: italic;
+  }
+  
+  .beer-info p.description {
+    font-size: 0.9rem;
+  }
+  
+  .beer-info p.abv {
+    font-weight: bold;
+    color: #28a745;
+  }
+  
+  .beer-info p.ph {
+    font-weight: bold;
+    color: #dc3545;
+  }

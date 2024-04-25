@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import beers from "../../assets/Data/beers";
+import "./BeerProfile.css"
 
 interface BeerProfileProps {
   handleDisplay: (display: boolean) => void;
@@ -40,14 +41,15 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
       </div>
       <div className="beerCard-container">
         <img src={beer.image_url} alt={beer.name} />
-        <div>
-          <p>{beer.name}</p>
-          <p>{beer.tagline}</p>
-          <p>{shortenedDescription(beer.description)}</p>
-          <p>
-            {beer.abv}% {beer.food_pairing.join(", ")}
+        <div className="beer-info">
+          <p className="name">{beer.name}</p>
+          <p className="tagline">{beer.tagline}</p>
+          <p className="description">{shortenedDescription(beer.description)}</p>
+          <p>{beer.food_pairing.join(", ")}</p>
+          <p className="abv">
+            {beer.abv}%
           </p>
-          <p>{beer.ph}</p>
+          <p className="ph">{beer.ph}</p>
         </div>
       </div>
     </div>
