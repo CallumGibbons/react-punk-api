@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     fetchBeers();
-  }, [currentPage, highABVFilter, classicFilter]);
+  }, [currentPage, highABVFilter, classicFilter, searchTerm]);
 
   const fetchBeers = async () => {
     try {
@@ -28,6 +28,9 @@ function App() {
       }
       if (classicFilter) {
         url += "&brewed_before=01-2010"
+      }
+      if (searchTerm) {
+        url += `&beer_name=${(searchTerm)}`;
       }
       const response = await fetch(url);
       if (!response.ok) {
@@ -40,28 +43,27 @@ function App() {
     }
   };
 
-  const handleSearchChange = (value: string) => {
-    setSearchTerm(value);
-  };
 
   const filteredBeers = (
     beers: Beer[],
-    searchTerm: string,
     acidic: boolean,
   ): Beer[] => {
-    let filtered = beers.filter((beer) =>
-      beer.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+   
     if (acidic) {
-      filtered = filtered.filter((beer) => beer.ph < 4);
+      beers = beers.filter((beer) => beer.ph < 4);
     }
 
-    return filtered;
+    return beers;
   };
   
 
   const handleBeerProfileDisplay = (display: boolean) => {
     setShowBeerList(display);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    setCurrentPage(1)
   };
 
   const handleHighABVFilterChange = (isChecked: boolean) => {
@@ -79,7 +81,9 @@ function App() {
   };
 
   const handlePageChange = (pageNumber: number) => {
+    if (pageNumber >= 1) {
     setCurrentPage(pageNumber);
+    }
   };
 
   return (
@@ -109,20 +113,19 @@ function App() {
             <BeerList
               beers={filteredBeers(
                 beers,
-                searchTerm,
-                acidicFilter
-                ,
+                acidicFilter,
               )}
             />
             <div className="pagination">
               <button
                 className="Back-Button"
                 onClick={() => handlePageChange(currentPage - 1)}
-              />
+              ></button>
+              <button className="Return-Button"onClick={() => setCurrentPage(1)}>Return</button>
               <button
                 className="Forward-Button"
                 onClick={() => handlePageChange(currentPage + 1)}
-              />
+                ></button>
             </div>
           </div>
         )}

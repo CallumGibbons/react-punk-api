@@ -1,15 +1,16 @@
 .beer-profile-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 100vw;
   padding: 20px;
 }
 
 .backButton {
-  margin-bottom: 20px;
+  padding-bottom: 2vh;
 }
 
 .backButton button {
+  text-decoration: none;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -24,6 +25,8 @@
 }
 
 .beerCard-container {
+  width: 90vw;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;

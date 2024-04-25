@@ -40,7 +40,7 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
   }
 
   return (
-    <div>
+    <div className="beer-profile-container">
       <div className="backButton">
         <button>
           <Link to="/">Home</Link>
@@ -53,8 +53,9 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
           <p className="tagline">{beer.tagline}</p>
           <p className="description">{beer.description}</p>
           <p className="description">{beer.brewers_tips}</p>
+          <p className="description">Goes With: {beer.food_pairing.join(", ")}</p>
           <p className="abv">
-            {beer.abv}%      {beer.food_pairing.join(", ")}
+            {beer.abv}%      
           </p>
           <p className="ph">{beer.ph} ph</p>
         </div>
