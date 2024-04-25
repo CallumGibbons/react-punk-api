@@ -2,6 +2,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import HighABVCheckbox from "./Filters/HighABVFilter";
 import ClassicCheckbox from "./Filters/ClassicRangeFilter";
 import AcidicCheckbox from "./Filters/AcidicFilter";
+import "./Nav.css"
 
 interface NavProps {
     searchTerm: string;
