@@ -18,13 +18,18 @@ function App() {
 
   useEffect(() => {
     fetchBeers();
-  }, [currentPage]);
+  }, [currentPage, highABVFilter, classicFilter]);
 
   const fetchBeers = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3333/v2/beers/?page=${currentPage}&per_page=20`
-      );
+      let url = `http://localhost:3333/v2/beers/?page=${currentPage}&per_page=20`;
+      if (highABVFilter) {
+        url += "&abv_gt=6";
+      }
+      if (classicFilter) {
+        url += "&brewed_before=01-2010"
+      }
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch beers");
       }
@@ -42,29 +47,18 @@ function App() {
   const filteredBeers = (
     beers: Beer[],
     searchTerm: string,
-    highABV: boolean,
     acidic: boolean,
-    classic: boolean
   ): Beer[] => {
     let filtered = beers.filter((beer) =>
       beer.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    if (highABV) {
-      filtered = filtered.filter((beer) => beer.abv > 6);
-    }
-    if (classic) {
-      filtered = filtered.filter((beer) => {
-        const firstBrewedYear = parseInt(beer.first_brewed.split("/")[1]);
-        return firstBrewedYear < 2010;
-      });
-    }
     if (acidic) {
       filtered = filtered.filter((beer) => beer.ph < 4);
     }
 
     return filtered;
   };
+  
 
   const handleBeerProfileDisplay = (display: boolean) => {
     setShowBeerList(display);
@@ -72,6 +66,7 @@ function App() {
 
   const handleHighABVFilterChange = (isChecked: boolean) => {
     setHighABVFilter(isChecked);
+    setCurrentPage(1);
   };
 
   const handleAcidicFilterChange = (isChecked: boolean) => {
@@ -80,6 +75,7 @@ function App() {
 
   const handleClassicFilterChange = (isChecked: boolean) => {
     setClassicFilter(isChecked);
+    setCurrentPage(1);
   };
 
   const handlePageChange = (pageNumber: number) => {
@@ -114,15 +110,20 @@ function App() {
               beers={filteredBeers(
                 beers,
                 searchTerm,
-                highABVFilter,
-                acidicFilter,
-                classicFilter
+                acidicFilter
+                ,
               )}
             />
-                      <div className="pagination">
-                      <button  className="Back-Button"onClick={() => handlePageChange(currentPage - 1)}/>
-                      <button className="Forward-Button"onClick={() => handlePageChange(currentPage + 1)}/>
-          </div>
+            <div className="pagination">
+              <button
+                className="Back-Button"
+                onClick={() => handlePageChange(currentPage - 1)}
+              />
+              <button
+                className="Forward-Button"
+                onClick={() => handlePageChange(currentPage + 1)}
+              />
+            </div>
           </div>
         )}
       </div>

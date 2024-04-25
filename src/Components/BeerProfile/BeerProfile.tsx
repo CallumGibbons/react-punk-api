@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Beer } from "../../assets/Data/types";
+import "./BeerProfile.css"
 
 interface BeerProfileProps {
   handleDisplay: (display: boolean) => void;
@@ -33,13 +34,6 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
     };
   }, [id, handleDisplay]);
 
-  const shortenedDescription = (desc: string) => {
-    if (desc.length <= 400) {
-      return desc;
-    } else {
-      return desc.substring(0, desc.lastIndexOf(".", 401)) + "...";
-    }
-  };
 
   if (!beer) {
     return <div>Beer not found</div>;
@@ -57,7 +51,7 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
         <div>
           <p>{beer.name}</p>
           <p>{beer.tagline}</p>
-          <p>{shortenedDescription(beer.description)}</p>
+          <p>{beer.description}</p>
           <p>
             {beer.abv}% {beer.food_pairing.join(", ")}
           </p>

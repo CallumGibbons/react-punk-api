@@ -1,4 +1,7 @@
 .beer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
   width: 200px;
   border: 1px solid #ccc;
   border-radius: 8px;
