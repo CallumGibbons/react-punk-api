@@ -13,6 +13,7 @@ function BeerCard({ beer }: BeerCardProps) {
       <p>{beer.tagline}</p>
       <p>{beer.description}</p>
       <p>ABV: {beer.abv}%</p>
+      <p>ph: {beer.ph}</p>
     </div>
   );
 }

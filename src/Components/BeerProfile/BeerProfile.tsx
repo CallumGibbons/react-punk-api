@@ -45,8 +45,9 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
           <p>{beer.tagline}</p>
           <p>{shortenedDescription(beer.description)}</p>
           <p>
-            {beer.abv} {beer.food_pairing.join(", ")}
+            {beer.abv}% {beer.food_pairing.join(", ")}
           </p>
+          <p>{beer.ph}</p>
         </div>
       </div>
     </div>
