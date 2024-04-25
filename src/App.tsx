@@ -15,6 +15,9 @@ function App() {
   const [classicFilter, setClassicFilter] = useState<boolean>(false);
   const [acidicFilter, setAcidicFilter] = useState<boolean>(false);
 
+
+  console.log(acidicFilter);
+  
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
   };
@@ -23,9 +26,12 @@ function App() {
     beers: Beer[],
     searchTerm: string,
     highABV: boolean,
-    classic: boolean,
-    acidic: boolean
+    acidic: boolean,
+    classic: boolean
+ 
   ): Beer[] => {
+    console.log(acidic);
+    
     let filtered = beers.filter((beer) =>
       beer.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -37,7 +43,9 @@ function App() {
       filtered = filtered.filter((beer) => beer.first_brewed);
     }
     if (acidic) {
+      console.log("getting here")
       filtered = filtered.filter((beer) => beer.ph < 4);
+      console.log(filtered)
     }
 
     return filtered;
@@ -75,7 +83,7 @@ function App() {
           />
         )}
         <Routes>
-          <Route path="/Home" element={<Home />} />
+          <Route path="/Home" element={<Home/>} />
           <Route
             path="/beer/:id"
             element={<BeerProfile handleDisplay={handleBeerProfileDisplay} />}
