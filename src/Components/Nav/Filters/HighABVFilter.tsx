@@ -1,15 +1,18 @@
 import React from "react";
-
+import "./FilterBox.css";
+// Define props interface for highABVCheckBox component
 interface HighABVCheckboxProps {
-  isChecked: boolean;
-  onChange: (isChecked: boolean) => void;
+  isChecked: boolean; // Boolean indicating whether the checkbox is checked or not
+  onChange: (isChecked: boolean) => void; // Function called when checkbox state changes
 }
-
+// Define highABVCheckBox component as a functional component
 const HighABVCheckbox: React.FC<HighABVCheckboxProps> = ({
   isChecked,
   onChange,
 }) => {
+  // Event handler for checkbox change event
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Call the onChange function with the new checkbox state
     onChange(e.target.checked);
   };
 
