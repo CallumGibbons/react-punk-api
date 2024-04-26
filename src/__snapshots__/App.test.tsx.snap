@@ -1,0 +1,81 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renders app component 1`] = `
+<div>
+  <div
+    class="App"
+  >
+    <div
+      class="nav"
+    >
+      <input
+        class="search-bar"
+        placeholder="Search beers..."
+        type="text"
+        value=""
+      />
+      <div
+        class="filter-box-container"
+      >
+        <input
+          class="filter-box"
+          type="checkbox"
+        />
+        <label
+          class="filter-box-text"
+        >
+          High ABV (Above 6%)
+        </label>
+      </div>
+      <div
+        class="filter-box-container"
+      >
+        <input
+          type="checkbox"
+        />
+        <label
+          class="filter-box-text"
+        >
+          Acidic (Below pH4)
+        </label>
+      </div>
+      <div
+        class="filter-box-container"
+      >
+        <input
+          class="filter-box"
+          type="checkbox"
+        />
+        <label
+          class="filter-box-text"
+        >
+          Classic Range 
+        </label>
+      </div>
+    </div>
+    <div />
+    <div
+      class="beers"
+    >
+      <div
+        class="beer-list"
+      />
+      <div
+        class="pagination"
+      >
+        <button
+          class="Back-Button"
+        />
+        <button
+          class="Return-Button"
+        >
+          Return
+        </button>
+        <button
+          class="Forward-Button"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
