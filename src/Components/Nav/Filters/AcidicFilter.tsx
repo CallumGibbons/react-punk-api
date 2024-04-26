@@ -19,6 +19,7 @@ const AcidicCheckbox: React.FC<AcidicCheckboxProps> = ({
   return (
     <div className="filter-box-container">
       <input
+      data-testid="acidic-filter"
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}

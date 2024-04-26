@@ -44,7 +44,7 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
   }
 
   return (
-    <div className="beer-profile-container">
+    <div data-testid="beer-profile" className="beer-profile-container">
       <div className="backButton">
         <button>
           <Link to="/">Home</Link>

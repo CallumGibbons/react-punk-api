@@ -19,6 +19,7 @@ const ClassicCheckbox: React.FC<ClassicCheckboxProps> = ({
   return (
     <div className="filter-box-container">
       <input
+      data-testid="classic-filter"
         className="filter-box"
         type="checkbox"
         checked={isChecked}

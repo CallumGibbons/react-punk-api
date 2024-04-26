@@ -19,6 +19,7 @@ const HighABVCheckbox: React.FC<HighABVCheckboxProps> = ({
   return (
     <div className="filter-box-container">
       <input
+      data-testid="high-abv-filter"
         className="filter-box"
         type="checkbox"
         checked={isChecked}

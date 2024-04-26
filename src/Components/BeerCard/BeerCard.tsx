@@ -19,7 +19,7 @@ const shortenedDescription = (desc: string) => {
 // BeerCard component
 function BeerCard({ beer }: BeerCardProps) {
   return (
-    <div className="beer-card">
+    <div data-testid="beer-card" className="beer-card">
       <img src={beer.image_url} alt={beer.name} />
       <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
       <p>{beer.tagline}</p>

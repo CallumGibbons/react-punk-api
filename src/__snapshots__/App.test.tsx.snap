@@ -19,6 +19,7 @@ exports[`renders app component 1`] = `
       >
         <input
           class="filter-box"
+          data-testid="high-abv-filter"
           type="checkbox"
         />
         <label
@@ -31,6 +32,7 @@ exports[`renders app component 1`] = `
         class="filter-box-container"
       >
         <input
+          data-testid="acidic-filter"
           type="checkbox"
         />
         <label
@@ -44,6 +46,7 @@ exports[`renders app component 1`] = `
       >
         <input
           class="filter-box"
+          data-testid="classic-filter"
           type="checkbox"
         />
         <label
