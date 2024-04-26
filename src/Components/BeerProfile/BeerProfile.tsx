@@ -60,7 +60,7 @@ const BeerProfile: React.FC<BeerProfileProps> = ({ handleDisplay }) => {
           <p className="description">
             Goes With: {beer.food_pairing.join(", ")}
           </p>
-          <p className="abv">{beer.abv}%</p>
+          <p className="abv">{beer.abv}% ABV</p>
           <p className="ph">{beer.ph} ph</p>
         </div>
       </div>

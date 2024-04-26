@@ -25,7 +25,7 @@ function BeerCard({ beer }: BeerCardProps) {
       <p>{beer.tagline}</p>
       <p>{shortenedDescription(beer.description)}</p>
       <p className="abv">ABV: {beer.abv}%</p>
-      <p className="ph">ph: {beer.ph}</p>
+      <p className="ph">pH: {beer.ph}</p>
     </div>
   );
 }
